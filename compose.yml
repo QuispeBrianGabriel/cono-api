@@ -5,5 +5,13 @@ services:
     build: .
     ports:
       - "8080:8080"
+    env_file:
+      - .env
     volumes:
       - .:/app
+  db:
+    image: postgres:18
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
