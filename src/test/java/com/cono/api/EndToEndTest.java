@@ -6,8 +6,5 @@ import org.springframework.test.web.servlet.client.RestTestClient;
 
 @AutoConfigureRestTestClient
 public class EndToEndTest extends IntegrationTest {
-
-    @Autowired
-    protected RestTestClient client;
-    
+  @Autowired protected RestTestClient client;
 }

@@ -7,9 +7,7 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcAuditing;
 @SpringBootApplication
 @EnableJdbcAuditing
 public class ApiApplication {
-
   public static void main(String[] args) {
     SpringApplication.run(ApiApplication.class, args);
   }
-
 }

@@ -7,14 +7,10 @@ import org.springframework.boot.testcontainers.service.connection.ServiceConnect
 import org.testcontainers.postgresql.PostgreSQLContainer;
 
 public abstract class IntegrationTest {
-
-  @ServiceConnection 
-  static PostgreSQLContainer postgres = new PostgreSQLContainer(
-    "postgres:18"
-  );
+  @ServiceConnection static PostgreSQLContainer db = new PostgreSQLContainer("postgres:18");
 
   static {
-    postgres.start();
+    db.start();
   }
 
   @Autowired Flyway flyway;
@@ -24,5 +20,4 @@ public abstract class IntegrationTest {
     flyway.clean();
     flyway.migrate();
   }
-
 }

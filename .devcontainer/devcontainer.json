@@ -1,5 +1,4 @@
 {
-  "name": "Dev",
   "dockerComposeFile": "../compose.yml",
   "service": "api",
   "workspaceFolder": "/app",
@@ -11,7 +10,8 @@
     "vscode": {
       "extensions": [
         "vscjava.vscode-java-pack",
-        "vscjava.vscode-gradle"
+        "vscjava.vscode-gradle",
+        "richardwillis.vscode-spotless-gradle"
       ]
     }
   }
