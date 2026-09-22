@@ -8,10 +8,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Getter 
 @SuperBuilder
+@NoArgsConstructor
 public abstract class Entity {
 
     @Id 
