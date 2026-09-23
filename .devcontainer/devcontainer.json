@@ -11,7 +11,11 @@
       "extensions": [
         "vscjava.vscode-java-pack",
         "vscjava.vscode-gradle",
-        "richardwillis.vscode-spotless-gradle"
+        "vmware.vscode-boot-dev-pack",
+        "github.vscode-github-actions",
+        "ms-azuretools.vscode-docker",
+        "cweijan.vscode-database-client2",
+        "cweijan.dbclient-jdbc"
       ]
     }
   }
