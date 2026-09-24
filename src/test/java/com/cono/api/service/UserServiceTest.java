@@ -2,17 +2,16 @@ package com.cono.api.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.cono.api.IntegrationTest;
+import com.cono.api.attachment.IntegrationTest;
 import com.cono.api.model.User;
 import com.cono.api.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-public class UserServiceTest extends IntegrationTest {
+@IntegrationTest
+public class UserServiceTest {
+
   @Autowired UserService service;
-
   @Autowired UserRepository repository;
 
   @Test
