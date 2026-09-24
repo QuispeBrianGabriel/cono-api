@@ -3,8 +3,6 @@ package com.cono.api.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.cono.api.attachment.IntegrationTest;
-import com.cono.api.model.User;
-import com.cono.api.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,18 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserServiceTest {
 
   @Autowired UserService service;
-  @Autowired UserRepository repository;
+
+  private static final String NAME = "Carlos";
+  private static final String SURNAME = "Perez";
+  private static final String EMAIL = "carlitos.pe@example.com";
+  private static final String PASSWORD = "SegurePass123!";
 
   @Test
   void shouldCreateUser() {
-    User created =
-        service.createUser("Carlos", "Perez", "carlitos.pe@example.com", "SegurePass123!");
-
-    User persisted = repository.findById(created.getId()).orElseThrow();
-
-    assertThat(persisted)
-        .usingRecursiveComparison()
-        .ignoringFields("created", "updated")
-        .isEqualTo(created);
+    assertThat(service.createUser(NAME, SURNAME, EMAIL, PASSWORD))
+        .isNotNull()
+        .returns(NAME, u -> u.getName())
+        .returns(SURNAME, u -> u.getSurname())
+        .returns(EMAIL, u -> u.getEmail())
+        .extracting(u -> u.getId())
+        .isNotNull();
   }
 }

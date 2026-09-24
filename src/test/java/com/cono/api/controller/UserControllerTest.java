@@ -8,36 +8,38 @@ import com.cono.api.contracts.UserResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.client.RestTestClient;
+import org.springframework.test.web.servlet.client.RestTestClient.ResponseSpec;
 
 @EndToEndTest
 public class UserControllerTest {
 
   @Autowired private RestTestClient client;
 
+  private static final String NAME = "Carlos";
+  private static final String SURNAME = "Perez";
+  private static final String EMAIL = "carlitos.pe@example.com";
+  private static final String PASSWORD = "SegurePass123!";
+
   @Test
   @DisplayName("POST /users")
   void shouldCreateUser() {
-
-    var request = new UserRequest("Carlos", "Perez", "carlitos.pe@example.com", "SegurePass123!");
-
-    var expected = new UserResponse(null, "Carlos", "Perez", "carlitos.pe@example.com");
-
-    client
-        .post()
-        .uri("/users")
-        .body(request)
-        .exchange()
+    UserRequest request = new UserRequest(NAME, SURNAME, EMAIL, PASSWORD);
+    ResponseSpec result = client.post().uri("/users").body(request).exchange();
+    result
         .expectStatus()
         .isCreated()
         .expectHeader()
-        .valueMatches("Location", ".*/users/.*")
-        .expectBody(UserResponse.class)
-        .value(
-            actual ->
-                assertThat(actual)
-                    .usingRecursiveComparison()
-                    .ignoringFields("id")
-                    .isEqualTo(expected));
+        .valueMatches(HttpHeaders.LOCATION, ".*/users/.*");
+
+    UserResponse response = result.expectBody(UserResponse.class).returnResult().getResponseBody();
+    assertThat(response)
+        .isNotNull()
+        .returns(NAME, r -> r.name())
+        .returns(SURNAME, r -> r.surname())
+        .returns(EMAIL, r -> r.email())
+        .extracting(r -> r.id())
+        .isNotNull();
   }
 }
