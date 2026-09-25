@@ -7,9 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @IntegrationTest
-public class UserServiceTest {
+public class AuthServiceTest {
 
-  @Autowired UserService service;
+  @Autowired AuthService service;
 
   private static final String NAME = "Carlos";
   private static final String SURNAME = "Perez";
@@ -17,8 +17,8 @@ public class UserServiceTest {
   private static final String PASSWORD = "SegurePass123!";
 
   @Test
-  void shouldCreateUser() {
-    assertThat(service.createUser(NAME, SURNAME, EMAIL, PASSWORD))
+  void shouldRegister() {
+    assertThat(service.register(NAME, SURNAME, EMAIL, PASSWORD))
         .isNotNull()
         .returns(NAME, u -> u.getName())
         .returns(SURNAME, u -> u.getSurname())

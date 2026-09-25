@@ -1,7 +1,10 @@
 package com.cono.api.repository;
 
 import com.cono.api.model.User;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<User, UUID> {}
+public interface UserRepository extends CrudRepository<User, UUID> {
+  Optional<User> findByEmail(String email);
+}
